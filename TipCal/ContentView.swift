@@ -37,12 +37,20 @@ struct ContentView: View {
     @State private var showTipButtons = false
     @State private var showNewBill = false
     @State private var selectedTip = 0
+    @State private var theTip = 0.0
+    @State private var theTotalBill = 0.0
     
-    private func CalculateTip() -> Double{
+    private func CalculateTip(tipPercent:Int){
+        showNewBill = true
+        //26.50 * 1.18
         
-        return 0.0
     }
     
+    private func reset(){
+        theBill = ""
+        showNewBill = false
+        showTipButtons = false
+    }
     
     var body: some View {
         ZStack {
@@ -62,20 +70,30 @@ struct ContentView: View {
                     .foregroundColor(Color.gray)
                 
                 //What was the damage TextField
-                TextField("What was the damage?", text:$theBill)
-                    .font(Font.system(size: 20))
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
-                    .textFieldStyle(OvalTextFieldStyle())
-                    .keyboardType(.decimalPad)
-                    .padding()
+                ZStack {
+                    TextField("What was the damage?", text:$theBill)
+                        .font(Font.system(size: 20))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                        .textFieldStyle(OvalTextFieldStyle())
+                        .keyboardType(.decimalPad)
+                        .padding()
                     .textCase(/*@START_MENU_TOKEN@*/.uppercase/*@END_MENU_TOKEN@*/)
+                    
+                    Button {
+                        reset()
+                    } label: {
+                        Image(systemName:"xmark.circle.fill")
+                            .foregroundColor(.white)
+                    }
+                    .offset(x:150)
+                }
                 
                 if showTipButtons {
                     VStack {
                         HStack {
                             Button(action: {
-                                showNewBill = true
+                                CalculateTip(tipPercent:Tips().t1)
                             }, label: {
                                 ZStack {
                                     Image("tipButtonBG")
@@ -148,6 +166,7 @@ struct ContentView: View {
             
             if(theBill != ""){
                 showTipButtons = true
+                
             }
         }
     }
