@@ -32,22 +32,40 @@ struct TipMainView: View {
             
             //
             //Background color - Bluish
-            Color.blue
+            RadialGradient(gradient: Gradient(colors: [.blue, .black]), center: .center, startRadius: 2, endRadius: 650)
                 .ignoresSafeArea()
-                .opacity(0.4)
+                .opacity(0.2)
             
             VStack(alignment: .center){
                 
                 //
                 //Logo
-                Image("appLogo")
-                    .shadow(color: Color.blue.opacity(0.3), radius: 4.0, x: 0.0, y: 5.0)
+                ZStack {
+                    Circle()
+                        .fill(Color.orange)
+                    Circle()
+                        .trim(from: 0.0, to: 0.5)
+                        .stroke(Color.yellow,lineWidth: 15)
+                        .frame(width:135,height:135)
+                        .rotationEffect(Angle.degrees(145))
+                    Text("%")
+                        .font(.system(size: 80))
+                        .fontWeight(.black)
+                        .foregroundColor(.yellow)
+                    Circle()
+                        .trim(from: 0.0, to: 1)
+                        .stroke(Color.white,lineWidth: 1)
+                        .opacity(0.5)
+                }
+                .frame(height:150)
+                .shadow(color: Color.orange.opacity(0.2), radius: 10.0, x: 0.0, y: 10.0)
+                .shadow(color: Color.white.opacity(0.9), radius: 25.0, x: 0.0, y: -20.0)
                 
                 //
                 //Title
                 Text("TIP CALCULATOR")
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    .fontWeight(.bold)
+                    .fontWeight(.black)
                     .foregroundColor(Color.blue)
                 
                 //
@@ -77,7 +95,7 @@ struct TipMainView: View {
                             Button {
                                 //code
                             } label: {
-                                Text("10%").fontWeight(.heavy).foregroundColor(.white)
+                                Text("\(TipOptions().t1) %").fontWeight(.heavy).foregroundColor(.white)
                             }
                             .frame(width: 146, height: 75, alignment: .center)
                             .background(Color(.orange))
@@ -85,7 +103,7 @@ struct TipMainView: View {
                             Button {
                                 //code
                             } label: {
-                                Text("10%").fontWeight(.heavy).foregroundColor(.white)
+                                Text("\(TipOptions().t2) %").fontWeight(.heavy).foregroundColor(.white)
                             }
                             .frame(width: 146, height: 75, alignment: .center)
                             .background(Color(.orange))
@@ -95,7 +113,7 @@ struct TipMainView: View {
                             Button {
                                 //code
                             } label: {
-                                Text("10%").fontWeight(.heavy).foregroundColor(.white)
+                                Text("\(TipOptions().t3) %").fontWeight(.heavy).foregroundColor(.white)
                             }
                             .frame(width: 146, height: 75, alignment: .center)
                             .background(Color(.orange))
@@ -103,7 +121,7 @@ struct TipMainView: View {
                             Button {
                                 //code
                             } label: {
-                                Text("10%").fontWeight(.heavy).foregroundColor(.white)
+                                Text("\(TipOptions().t4) %").fontWeight(.heavy).foregroundColor(.white)
                             }
                             .frame(width: 146, height: 75, alignment: .center)
                             .background(Color(.orange))
@@ -127,6 +145,9 @@ struct TipMainView: View {
                         Spacer()
                         Text("+ 10.00").fontWeight(.heavy)
                             .foregroundColor(Color.white)
+                        Text("10% GRADITUDE").fontWeight(.thin)
+                            .foregroundColor(Color.white)
+                            .font(.system(size: 20))
                         Spacer()
                         Divider()
                             .frame(height:1)
